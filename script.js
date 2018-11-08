@@ -1,7 +1,12 @@
 if(document.URL.indexOf("&")==-1) end=100;
 else end=document.URL.indexOf("&");
 var start=document.URL.substring(document.URL.indexOf("o=")+2,end);
- 
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo(){
 for(var i=0;i<totalPage;i++){
     $.ajax({
         type: "POST", async: false,
@@ -14,6 +19,9 @@ for(var i=0;i<totalPage;i++){
             }
         }
     });
-    ts1 = new Date().getTime() + 10000;
-    do ts2 = new Date().getTime(); while (ts2<ts1);
+   console.log("page " + i + " complete.");
+   await sleep(10000);
 }
+}
+
+demo();
